@@ -4,12 +4,44 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Une petite to-do list en HTML / CSS / JS">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="./styles.css">
     <title>JS | To-Do-List</title>
 </head>
 <body>
-    <h1>TO DO List :</h1>
-    <script src="./app.js"></script>
+    <div class="container">
+        <div class="row">
+            <div class="intro col-12">
+                <h1>JS | To do List :</h1>
+                <div>
+                    <div class="border1">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="help-text col-12">
+                <p id="first">Tapez votre tâche dans la barre</p>
+                <p id="second">Cliquez dessus quand vous avez terminé votre tâche</p>
+                <p id="third">Cliquez sur "X" pour retirer une tâche de votre liste</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <input type="text" id="user-input" placeholder="Nouvelle tâche..." maxlength="27">
+                <button type="submit" id="enter">+</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="list-item col-12">
+                <ul class="col-12 offset-0 col-sm-8 offset-sm-2">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="./app.js"></script>
 </body>
 </html>
