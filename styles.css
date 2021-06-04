@@ -73,7 +73,8 @@ li{
     border: 2px solid rgb(61, 61, 61);
     border-radius: 3px;
     margin-bottom: 10px;
-    background-color: rgb(219, 105, 105);
+    background-color: rgb(189, 79, 79);
+    color: rgba(252, 249, 249, 0.89);
 }
 li:hover{
     background-color: rgb(168, 63, 63);
@@ -85,8 +86,14 @@ li > button{
     float: right;
 }
 .done{
-    background-color: rgb(19, 77, 19) !important;
+    background-color: rgb(49, 100, 49) !important;
 }
 .delete{
     display: none;
+}
+.delete-btn{
+    color: white;
+}
+.delete-btn:hover{
+    color: rgba(48, 46, 46, 0.884);
 }
