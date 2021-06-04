@@ -97,3 +97,16 @@ li > button{
 .delete-btn:hover{
     color: rgba(48, 46, 46, 0.884);
 }
+.reset{
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 3px;
+    color: white;
+    display: none;
+    border: none;
+    background-color: rgb(168, 63, 63);
+}
+.reset:hover{
+    opacity: 0.8;
+    transition: 0.5s;
+}
