@@ -11,19 +11,24 @@ function inputLength(){
 
 // fonction qui store les éléments dans le localstorage
 function storage(element){
-    let index = window.localStorage.length;
-    for(let i = 0; i <= index; i++)
-    window.localStorage["list-"+i] = element.innerHTML;
+    let index = window.localStorage.length; //2
+    // actuellement à chaque tour de boucle je réécrit la valeur correspondant à la clé i par celle de element
+    for(let i = 1; i <= index+1; i++){
+        window.localStorage["list-"+i] = element.innerHTML;
+    }
 }
 
 // fonction qui récupère les éléments du local storage
 function getValues(){
     if(localStorage){
-        // let storageContent = window.localStorage.list;
-        for(i = 0; i < localStorage.length; i++) {
-            let x = sessionStorage["list"+i];
-            ul.innerHTML = "<li>"+x+"</li>";
-      }
+        let index = window.localStorage.length;
+        // boucle qui récupère la valeur de la clé list de i et l'entoure de balises HTML
+        for(i = 0; i < index; i++) {
+            let x = localStorage["list-"+i];
+            let storageLi = "<li>"+x+"</li>";
+            ul.innerHTML = storageLi;
+            console.log()
+        }
     }
 }
 getValues()
@@ -36,6 +41,7 @@ function createListElement(){
     ul.appendChild(li);
     // on lance l'exécution du storage
     storage(li);
+    deleteElement(li)
     // on vide la valeur de l'input une fois que le li est ajouté (pour avoir la barre de saisie vide)
     input.value = "";
      
@@ -57,17 +63,17 @@ function createListElement(){
             }
         })
     }
-
-    let deleteBtn = document.createElement("button");
-    deleteBtn.appendChild(document.createTextNode("X"));
-    li.appendChild(deleteBtn);
-    deleteBtn.addEventListener('click', () => {
-        li.remove();
-        // fonction à coder pour retirer l'élément du local storage
-        // localStorage.removeItem("list");
-    });
 }
 
+function deleteElement(element){
+    let deleteBtn = document.createElement("button");
+    deleteBtn.appendChild(document.createTextNode("X"));
+    element.appendChild(deleteBtn);
+    deleteBtn.addEventListener('click', () => {
+        element.remove();
+    });
+    // localStorage.removeItem("list");
+}
 function addListAfterClick(){
     // s'il y a une saisie dans le input
     if(inputLength() > 0 ){
