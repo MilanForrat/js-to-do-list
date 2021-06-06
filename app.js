@@ -9,6 +9,25 @@ function inputLength(){
     return input.value.length;
 }
 
+// fonction qui store les éléments dans le localstorage
+function storage(element){
+    let index = window.localStorage.length;
+    for(let i = 0; i <= index; i++)
+    window.localStorage["list-"+i] = element.innerHTML;
+}
+
+// fonction qui récupère les éléments du local storage
+function getValues(){
+    if(localStorage){
+        // let storageContent = window.localStorage.list;
+        for(i = 0; i < localStorage.length; i++) {
+            let x = sessionStorage["list"+i];
+            ul.innerHTML = "<li>"+x+"</li>";
+      }
+    }
+}
+getValues()
+
 function createListElement(){
     let li = document.createElement('li');
     // ajoute un texte au li
@@ -16,7 +35,7 @@ function createListElement(){
     // ajoute le li à l'ul
     ul.appendChild(li);
     // on lance l'exécution du storage
-    storage();
+    storage(li);
     // on vide la valeur de l'input une fois que le li est ajouté (pour avoir la barre de saisie vide)
     input.value = "";
      
@@ -29,7 +48,7 @@ function createListElement(){
     li.addEventListener("click", endTask);
     let ulNumberOfChildren = ul.childElementCount;
     if(ulNumberOfChildren > 1 && ulNumberOfChildren < 3){
-        resetBtn.style.display = "block";
+        resetBtn.style.display = "inline";
         resetBtn.addEventListener('click', (e) => {
             if(confirm("Voulez-vous vraiment effacer toutes vos tâches en cours ?")){
                 window.localStorage.clear();
@@ -44,6 +63,8 @@ function createListElement(){
     li.appendChild(deleteBtn);
     deleteBtn.addEventListener('click', () => {
         li.remove();
+        // fonction à coder pour retirer l'élément du local storage
+        // localStorage.removeItem("list");
     });
 }
 
@@ -64,19 +85,6 @@ function addListAfterKeyPress(e){
         createListElement();
     }
 }
-
-// 
-function storage(){
-    window.localStorage.todoList = ul.innerHTML;
-}
-
-function getValues(){
-    let storageContent = window.localStorage.todoList;
-    if(storageContent){
-        ul.innerHTML = storageContent;
-    }
-}
-getValues()
 
 enterButton.addEventListener("click", addListAfterClick);
 input.addEventListener("keypress", addListAfterKeyPress);
