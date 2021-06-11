@@ -8,26 +8,43 @@ let resetBtn = document.querySelector('.reset');
 function inputLength(){
     return input.value.length;
 }
-
+let index;
+if(localStorage.length != 0){
+    index = localStorage.length;
+}
+else{
+    index = 0;
+}
 // fonction qui store les éléments dans le localstorage
 function storage(element){
-    let index = window.localStorage.length; //2
     // actuellement à chaque tour de boucle je réécrit la valeur correspondant à la clé i par celle de element
-    for(let i = 1; i <= index+1; i++){
-        window.localStorage["list-"+i] = element.innerHTML;
-    }
+    window.localStorage.setItem("list-"+index,element.innerHTML );
+    index++;
 }
 
 // fonction qui récupère les éléments du local storage
 function getValues(){
-    if(localStorage){
+    if(localStorage.length != 0){
         let index = window.localStorage.length;
+        let li = 0;
         // boucle qui récupère la valeur de la clé list de i et l'entoure de balises HTML
-        for(i = 0; i < index; i++) {
-            let x = localStorage["list-"+i];
+        for(let i = 0; i < index; i++) {
+            let x = localStorage.getItem("list-"+i);
             let storageLi = "<li>"+x+"</li>";
-            ul.innerHTML = storageLi;
-            console.log()
+            // console.log(storageLi)
+            // deleteElement(x);
+            ul.innerHTML += storageLi;
+            // deleteElement(y);
+        }
+        let ulElements = ul.childNodes;
+        for(let i = 1; i < ulElements.length; i++){
+            // console.log(ulElements[i])
+            deleteElement(ulElements[i]);
+            ulElements[i].addEventListener("click", endTask);
+            function endTask(){
+                // le toggle permet de faire l'effet on/off
+                ulElements[i].classList.toggle("done");
+            }
         }
     }
 }
@@ -54,12 +71,13 @@ function createListElement(){
     li.addEventListener("click", endTask);
     let ulNumberOfChildren = ul.childElementCount;
     if(ulNumberOfChildren > 1 && ulNumberOfChildren < 3){
-        resetBtn.style.display = "inline";
+        resetBtn.style.visibility = "visible";
         resetBtn.addEventListener('click', (e) => {
             if(confirm("Voulez-vous vraiment effacer toutes vos tâches en cours ?")){
                 window.localStorage.clear();
+                index = 0;
                 ul.innerHTML ="";
-                resetBtn.style.display = "none";
+                resetBtn.style.visibility = "hidden";
             }
         })
     }
@@ -71,8 +89,9 @@ function deleteElement(element){
     element.appendChild(deleteBtn);
     deleteBtn.addEventListener('click', () => {
         element.remove();
+        // console.log(element)
+        localStorage.removeItem(element);
     });
-    // localStorage.removeItem("list");
 }
 function addListAfterClick(){
     // s'il y a une saisie dans le input

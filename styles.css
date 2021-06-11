@@ -102,7 +102,7 @@ li > button{
     padding: 5px;
     border-radius: 3px;
     color: white;
-    display: none;
+    visibility: hidden;
     border: none;
     background-color: rgb(168, 63, 63);
 }
